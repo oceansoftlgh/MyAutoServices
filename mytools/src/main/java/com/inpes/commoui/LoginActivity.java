@@ -393,6 +393,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		try {
 			Intent in = new Intent(LoginActivity.this, MainActivity.class);
 			startActivity(in);
+			this.finish();
 		} catch (Exception e) {
 			e.printStackTrace();
 			finish();
