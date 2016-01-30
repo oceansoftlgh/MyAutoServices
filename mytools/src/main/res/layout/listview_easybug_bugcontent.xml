@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginBottom="2dp"
+              android:layout_marginLeft="8dp"
+              android:layout_marginRight="8dp"
+              android:layout_marginTop="2dp"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lv_tv_easybug_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:text="932263#web端根据使用登记生成的请领单无法提交"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/lv_tv_easybug_bugstat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:singleLine="true"
+            android:text="未修复"
+            android:textSize="16sp"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/lv_tv_easybug_handler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="liuguagnhui"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/lv_tv_easybug_priority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/lv_tv_easybug_handler"
+            android:singleLine="true"
+            android:text="中"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/lv_tv_easybug_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@id/lv_tv_easybug_date"
+            android:singleLine="true"
+            android:text="CSSD5.0"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/lv_tv_easybug_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:singleLine="true"
+            android:text="2016-01-22"
+            android:textSize="16sp"
+            />
+    </RelativeLayout>
+</LinearLayout>

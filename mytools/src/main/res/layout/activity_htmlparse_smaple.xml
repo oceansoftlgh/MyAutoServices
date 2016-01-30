@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginLeft="16dp"
+              android:layout_marginRight="16dp"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_htmlparse_emile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="8dp"
+            android:singleLine="true"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/et_htmlparse_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textSize="16sp"/>
+
+        
+    </LinearLayout>
+
+    <!--<view-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="5dp"-->
+        <!--/>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content">
+        
+        <EditText
+            android:id="@+id/et_htmlparse_loginverify"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/btn_htmlparse_loginverify"
+            android:layout_width="wrap_content"
+            android:textSize="16sp"
+            android:text="登录验证"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content"
+            />
+        <CheckBox
+            android:id="@+id/cb_htmlparse_saveuser"
+            android:layout_width="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_height="30dp"
+            android:text="记录账号"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_height="wrap_content">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_gravity="center"
+                      android:layout_height="wrap_content"
+                      android:textSize="16sp"
+                      android:text="优先级："/>
+            <Spinner android:layout_height="40dp"
+                     android:layout_width="0dp"
+                     android:id="@+id/spn_htmlparse_priority"
+                     android:layout_weight="2"
+                     />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content"
+                      android:textSize="16sp"
+                      android:layout_gravity="center"
+                      android:layout_height="wrap_content"
+                      android:text="状态："/>
+            
+            <Spinner android:layout_height="40dp"
+                     android:layout_width="0dp"
+                     android:id="@+id/spn_htmlparse_bugstat"
+                     android:layout_weight="1"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content"
+                      android:textSize="16sp"
+                      android:layout_gravity="center"
+                      android:layout_height="wrap_content"
+                      android:text="handler"/>
+            
+            <Spinner android:layout_height="40dp"
+                     android:layout_width="0dp"
+                     android:id="@+id/spn_htmlparse_handler"
+                     android:layout_weight="1"
+                />
+        </TableRow> 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content"
+                      android:textSize="16sp"
+                      android:layout_gravity="center"
+                      android:layout_height="wrap_content"
+                      android:text="keyWord"/>
+            
+            <Spinner android:layout_height="40dp"
+                     android:layout_width="0dp"
+                     android:id="@+id/spn_htmlparse_keyWord"
+                     android:layout_weight="1"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content"
+                      android:textSize="16sp"
+                      android:layout_gravity="center"
+                      android:layout_height="wrap_content"
+                      android:text="member"/>
+            
+            <Spinner android:layout_height="40dp"
+                     android:layout_width="0dp"
+                     android:id="@+id/spn_htmlparse_member"
+                     android:layout_weight="1"
+                />
+        </TableRow>
+          <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content"
+                      android:textSize="16sp"
+                      android:layout_gravity="center"
+                      android:layout_height="wrap_content"
+                      android:text="pid"/>
+            
+            <Spinner android:layout_height="40dp"
+                     android:layout_width="0dp"
+                     android:id="@+id/spn_htmlparse_pid"
+                     android:layout_weight="1"
+                />
+        </TableRow>
+          <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content"
+                      android:textSize="16sp"
+                      android:layout_gravity="center"
+                      android:layout_height="wrap_content"
+                      android:text="orderBy"/>
+            
+            <Spinner android:layout_height="40dp"
+                     android:layout_width="0dp"
+                     android:id="@+id/spn_htmlparse_orderBy"
+                     android:layout_weight="1"
+                />
+        </TableRow> <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content"
+                      android:textSize="16sp"
+                      android:layout_gravity="center"
+                      android:layout_height="wrap_content"
+                      android:text="version"/>
+            
+            <Spinner android:layout_height="40dp"
+                     android:layout_width="0dp"
+                     android:id="@+id/spn_htmlparse_version"
+                     android:layout_weight="1"
+                />
+        </TableRow>  
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content"
+                      android:textSize="16sp"
+                      android:layout_gravity="center"
+                      android:layout_height="wrap_content"
+                      android:text="moudle"/>
+            
+            <Spinner android:layout_height="40dp"
+                     android:layout_width="0dp"
+                     android:id="@+id/spn_htmlparse_moudle"
+                     android:layout_weight="1"
+                />
+        </TableRow>
+        
+    </TableLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_htmlparse_getallbug"
+            android:layout_width="wrap_content"
+            android:textSize="16sp"
+            android:text="获取全部"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            />
+        <Button
+            android:id="@+id/btn_htmlparse_getfliterbug"
+            android:layout_width="wrap_content"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="获取筛选"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="16dp"
+              android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_inttypessmaple_inputint"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:hint="Interger:十进制"
+        android:textSize="16sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_inttypesmaple_tentosix"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="10转16"/>
+
+        <Button
+            android:id="@+id/btn_inttypesmaple_sixteentoten"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="16转10"/>
+       
+        <Button
+            android:id="@+id/btn_inttypesmaple_tentobinary"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="10转2"/>
+
+        <Button
+            android:id="@+id/btn_inttypesmaple_binarytoten"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="2转10"/>
+
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_inttypessmaple_outputint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="left|center_vertical"
+        android:hint="结果："
+        android:textSize="16sp"/>
+
+
+</LinearLayout>

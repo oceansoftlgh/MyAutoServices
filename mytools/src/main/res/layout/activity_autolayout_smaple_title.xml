@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="280px"
+                android:background="#eeeff3"
+    >
+
+    <ImageView
+        android:layout_width="227px"
+        android:layout_height="81px"
+        android:layout_marginLeft="24px"
+        android:layout_marginTop="43px"
+        android:src="@drawable/dingdingnoresponse_r1_c2"
+        />
+
+    <ImageView
+        android:layout_width="104px"
+        android:layout_height="81px"
+        android:layout_marginLeft="686px"
+        android:layout_marginTop="43px"
+        android:src="@drawable/dingdingnoresponse_r1_c6"
+        />
+    
+        <ImageView
+            android:layout_width="104px"
+            android:layout_height="81px"
+            android:layout_marginLeft="820px"
+            android:layout_marginStart="820px"
+            android:layout_marginTop="43px"
+            android:src="@drawable/dingdingnoresponse_r1_c9"
+            />
+    
+        <ImageView
+            android:layout_width="104px"
+            android:layout_height="81px"
+            android:layout_marginLeft="959px"
+            android:layout_marginTop="43px"
+            android:src="@drawable/dingdingnoresponse_r1_c11"
+            />
+    
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="135px"
+    android:layout_marginLeft="0px"
+    android:layout_marginStart="0px"
+    
+    android:layout_marginTop="144px"
+    android:orientation="horizontal"
+    >
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@drawable/dingdingnoresponse_r3_c1"
+        />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        
+        android:src="@drawable/dingdingnoresponse_r3_c4"
+        />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+
+        android:src="@drawable/dingdingnoresponse_r3_c5"
+        />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+
+        android:src="@drawable/dingdingnoresponse_r3_c8"
+        />
+</LinearLayout>
+   
+    
+</RelativeLayout>
