@@ -1,11 +1,15 @@
-package com.oceansoft.ghclock.androidui;
+package com.oceansoft.ghclock.htmpparse;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,10 +20,6 @@ import com.oceansoft.ghclock.R;
 import com.oceansoft.ghclock.commonutil.MSGUtil;
 import com.oceansoft.ghclock.commonutil.Toaster;
 import com.oceansoft.ghclock.commonutil.WorkInfoAgent;
-import com.oceansoft.ghclock.htmpparse.BugFilterModel;
-import com.oceansoft.ghclock.htmpparse.OptionModel;
-import com.oceansoft.ghclock.htmpparse.SelectorModel;
-import com.oceansoft.ghclock.htmpparse.SelfHtmlParseActivityControl;
 
 import org.apache.commons.httpclient.HttpClient;
 
@@ -29,7 +29,8 @@ import java.util.HashMap;
 /**
  * Created by Administrator on 2016/1/26.
  */
-public class SelfHtmlParseActivity extends Activity {
+public class SelfHtmlParseSelectorFrement extends Fragment {
+	private  Context mContext;
 	//widgets
 	EditText et_email, et_password;
 	EditText et_varilResult;
@@ -59,21 +60,22 @@ public class SelfHtmlParseActivity extends Activity {
 	boolean isConnect = false;
 	private HashMap<String ,SelectorModel> filters;
 
+	
+	@Nullable
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-//		setContentView(R.lay);
-//		setContentView(R.la)
-		initWidgets();
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.activity_htmlparse_selector,container,false);
+		initWidgets(view);
 		initMembers();
 		binEvent();
 		initDate();
+		return view;
 	}
 
 	private void initDate() {
 		try {
-			String email = WorkInfoAgent.getRecordInfo(SelfHtmlParseActivity.this, "email");
-			String password = WorkInfoAgent.getRecordInfo(SelfHtmlParseActivity.this, "Password");
+			String email = WorkInfoAgent.getRecordInfo(this.getActivity(), "email");
+			String password = WorkInfoAgent.getRecordInfo(this.getActivity(), "Password");
 			if (!"".equals(email)) {
 				et_email.setText(email);
 				if (!"".equals(password)) {
@@ -87,18 +89,24 @@ public class SelfHtmlParseActivity extends Activity {
 			e.printStackTrace();
 		}
 	}
+	public SelfHtmlParseSelectorFrement(){
+		
+	}
+	
+
 
 	private void initMembers() {
+
 		mHandler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
 				switch (msg.what) {
 					case MSGUtil.SHOW_TOAST_ERROR:
-						Toaster.showToast(SelfHtmlParseActivity.this, MSGUtil.error);
+						Toaster.showToast(SelfHtmlParseSelectorFrement.this.getActivity(), MSGUtil.error);
 						break;
 					case MSGUtil.SHOW_TOAST_TIP:
-						Toaster.showToast(SelfHtmlParseActivity.this, MSGUtil.tip);
+						Toaster.showToast(SelfHtmlParseSelectorFrement.this.getActivity(), MSGUtil.tip);
 						break;
 					case MSGUtil.ACTION_AFTER_INIT:
 						connectToServer();
@@ -120,8 +128,8 @@ public class SelfHtmlParseActivity extends Activity {
 					case R.id.btn_htmlparse_loginverify:
 						boolean result_conn = connectToServer();
 						if (result_conn && cb_saveUser.isChecked()) {
-							WorkInfoAgent.saveRecordInfo(SelfHtmlParseActivity.this, "email", et_email.getText().toString());
-							WorkInfoAgent.saveRecordInfo(SelfHtmlParseActivity.this, "Password", et_password.getText().toString());
+							WorkInfoAgent.saveRecordInfo(SelfHtmlParseSelectorFrement.this.getActivity(), "email", et_email.getText().toString());
+							WorkInfoAgent.saveRecordInfo(SelfHtmlParseSelectorFrement.this.getActivity(), "Password", et_password.getText().toString());
 						}
 						break;
 					case R.id.btn_htmlparse_getallbug:
@@ -198,30 +206,31 @@ public class SelfHtmlParseActivity extends Activity {
 		if(filters.size() <= 0){
 			return;
 		}
+		Context context = this.getActivity();
 		//bugStatus
-		spn_bugStatus.setAdapter(new ArrayAdapter<OptionModel>(this,android.R.layout.simple_spinner_item,filters.get("bugStatus").getOptions()));
+		spn_bugStatus.setAdapter(new ArrayAdapter<OptionModel>(context,android.R.layout.simple_spinner_item,filters.get("bugStatus").getOptions()));
 		//handler
-		spn_handler.setAdapter(new ArrayAdapter<OptionModel>(this,android.R.layout.simple_spinner_item,filters.get("handler").getOptions()));
+		spn_handler.setAdapter(new ArrayAdapter<OptionModel>(context,android.R.layout.simple_spinner_item,filters.get("handler").getOptions()));
 		//keyWord
 		//spn.setAdapter(new ArrayAdapter<OptionModel>(this,android.R.layout.simple_spinner_item,filters.get("keyWord").getOptions()));
 		//member
 		if(filters.containsKey("member"))
-		spn_member.setAdapter(new ArrayAdapter<OptionModel>(this,android.R.layout.simple_spinner_item,filters.get("member").getOptions()));
+		spn_member.setAdapter(new ArrayAdapter<OptionModel>(context,android.R.layout.simple_spinner_item,filters.get("member").getOptions()));
 		//moudle
 		if(filters.containsKey("moudle"))
-		spn_moudle.setAdapter(new ArrayAdapter<OptionModel>(this, android.R.layout.simple_spinner_item, filters.get("moudle").getOptions()));
+		spn_moudle.setAdapter(new ArrayAdapter<OptionModel>(context, android.R.layout.simple_spinner_item, filters.get("moudle").getOptions()));
 		//orderBy
 		if(filters.containsKey("orderBy"))
-		spn_orderBy.setAdapter(new ArrayAdapter<OptionModel>(this, android.R.layout.simple_spinner_item, filters.get("orderBy").getOptions()));
+		spn_orderBy.setAdapter(new ArrayAdapter<OptionModel>(context, android.R.layout.simple_spinner_item, filters.get("orderBy").getOptions()));
 		//pid
 		if(filters.containsKey("pid"))
-		spn_pid.setAdapter(new ArrayAdapter<OptionModel>(this, android.R.layout.simple_spinner_item, filters.get("pid").getOptions()));
+		spn_pid.setAdapter(new ArrayAdapter<OptionModel>(context, android.R.layout.simple_spinner_item, filters.get("pid").getOptions()));
 		//priority
 		if(filters.containsKey("priority"))
-		spn_priority.setAdapter(new ArrayAdapter<OptionModel>(this, android.R.layout.simple_spinner_item, filters.get("priority").getOptions()));
+		spn_priority.setAdapter(new ArrayAdapter<OptionModel>(context, android.R.layout.simple_spinner_item, filters.get("priority").getOptions()));
 		//version
 		if(filters.containsKey("version"))
-		spn_version.setAdapter(new ArrayAdapter<OptionModel>(this, android.R.layout.simple_spinner_item, filters.get("version").getOptions()));
+		spn_version.setAdapter(new ArrayAdapter<OptionModel>(context, android.R.layout.simple_spinner_item, filters.get("version").getOptions()));
 	}
 
 
@@ -254,28 +263,28 @@ public class SelfHtmlParseActivity extends Activity {
 	}
 
 
-	private void initWidgets() {
-		setContentView(R.layout.activity_htmlparse_smaple);
+	private void initWidgets(View view) {
+		
 
-		et_email = (EditText) findViewById(R.id.et_htmlparse_emile);
-		et_password = (EditText) findViewById(R.id.et_htmlparse_password);
-		et_varilResult = (EditText) findViewById(R.id.et_htmlparse_loginverify);
+		et_email = (EditText) view.findViewById(R.id.et_htmlparse_emile);
+		et_password = (EditText) view.findViewById(R.id.et_htmlparse_password);
+		et_varilResult = (EditText) view.findViewById(R.id.et_htmlparse_loginverify);
 		
-		cb_saveUser = (CheckBox) findViewById(R.id.cb_htmlparse_saveuser);
+		cb_saveUser = (CheckBox) view.findViewById(R.id.cb_htmlparse_saveuser);
 		
-		btn_varil = (Button) findViewById(R.id.btn_htmlparse_loginverify);
-		btn_getAllBug = (Button) findViewById(R.id.btn_htmlparse_getallbug);
-		btn_getFilterBug = (Button) findViewById(R.id.btn_htmlparse_getfliterbug);
+		btn_varil = (Button) view.findViewById(R.id.btn_htmlparse_loginverify);
+		btn_getAllBug = (Button) view.findViewById(R.id.btn_htmlparse_getallbug);
+		btn_getFilterBug = (Button) view.findViewById(R.id.btn_htmlparse_getfliterbug);
 		
-		spn_bugStatus = (Spinner) findViewById(R.id.spn_htmlparse_bugstat);
-		spn_handler = (Spinner) findViewById(R.id.spn_htmlparse_handler);
-		spn_member = (Spinner) findViewById(R.id.spn_htmlparse_member);
-		spn_moudle = (Spinner) findViewById(R.id.spn_htmlparse_moudle);
-		spn_orderBy = (Spinner) findViewById(R.id.spn_htmlparse_orderBy);
-		//spn_pageIndex = (Spinner) findViewById(R.id.sp);
-		spn_pid  = (Spinner) findViewById(R.id.spn_htmlparse_pid);
-		spn_priority = (Spinner) findViewById(R.id.spn_htmlparse_priority);
-		spn_version = (Spinner) findViewById(R.id.spn_htmlparse_version);
+		spn_bugStatus = (Spinner) view.findViewById(R.id.spn_htmlparse_bugstat);
+		spn_handler = (Spinner) view.findViewById(R.id.spn_htmlparse_handler);
+		spn_member = (Spinner) view.findViewById(R.id.spn_htmlparse_member);
+		spn_moudle = (Spinner) view.findViewById(R.id.spn_htmlparse_moudle);
+		spn_orderBy = (Spinner) view.findViewById(R.id.spn_htmlparse_orderBy);
+		//spn_pageIndex = (Spinner) view.findViewById(R.id.sp);
+		spn_pid  = (Spinner) view.findViewById(R.id.spn_htmlparse_pid);
+		spn_priority = (Spinner) view.findViewById(R.id.spn_htmlparse_priority);
+		spn_version = (Spinner) view.findViewById(R.id.spn_htmlparse_version);
 	}
 	private BugFilterModel getFilter() {
 		
