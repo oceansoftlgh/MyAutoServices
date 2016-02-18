@@ -1,0 +1,46 @@
+<resources>
+    
+    <!-- 主界面列表数据-->
+    <string-array name="toolss_items">
+        <item>Login</item>
+        <item>Volley</item>
+        <item>Udp</item>
+        <item>Bluetooh</item>
+        <item>BluetoohChat</item>
+        <item>Notify</item>
+        <item>NavigateSmaple-SideMennu</item>
+        <item>NavigateSmaple-ContextMenu</item>
+        <item>BrocastCheck</item>
+        <item>PushDemoActivity</item>
+        <item>SwipeToDrop</item>
+        <item>EquipmentDetail</item>
+        <item>AutoLayoutSmaple</item>
+        <item>DigitalConvertSmaple</item>
+        <item>AutoServicesManager</item>
+        <item>NdkSmapleActivity</item>
+        <item>MdkServiceSmapleActivity</item>
+        <item>HtmlParseSmapleActivity</item>
+    </string-array>
+        
+    <string-array name="tools_pkgs">
+        <item>com.oceansoft.ghclock.commoui.LoginActivity</item>
+        <item>com.oceansoft.ghclock.androidui.VollleySmapleActivity</item>
+        <item>com.oceansoft.ghclock.androidui.UdpSmapleActivity</item>
+        <item>com.oceansoft.ghclock.androidui.BluetoothSmapleActivity</item>
+        <item>com.oceansoft.ghclock.androidui.BluetoothChat</item>
+        <item>com.oceansoft.ghclock.androidui.AlterManagerActivity</item>
+        <item>com.oceansoft.ghclock.navigatui.NagaviteDrawTooBarActivity</item>
+        <item>com.oceansoft.ghclock.androidui.NagaviteContextMainActivity</item>
+        <item>com.oceansoft.ghclock.androidui.BrocastCheckActivity</item>
+        <item>com.oceansoft.ghclock.androidui.PushDemoActivity</item>
+        <item>com.oceansoft.ghclock.androidui.SwipeToDropLVActivity</item>
+        <item>com.oceansoft.ghclock.androidui.EquipmentDetailsActivity</item>
+        <item>com.oceansoft.ghclock.androidui.AutoLayoutSmapleActivity</item>
+        <item>com.oceansoft.ghclock.androidui.DigitalConvertSmapleActivity</item>
+        <item>com.oceansoft.ghclock.androidui.ServicesManagerSmapleActivity</item>
+        <item>com.oceansoft.ghclock.ndk.NdkSmapleActivity</item>
+        <item>com.oceansoft.ghclock.ndk.NdkServiceSmapleActivity</item>
+        <item>com.oceansoft.ghclock.androidui.SelfHtmlParseManagerActivity</item>
+    </string-array>
+</resources>
+     

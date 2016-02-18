@@ -30,6 +30,9 @@ public class OptionModel {
 
 	@Override
 	public String toString() {
+		if(text.isEmpty()){
+			return value;
+		}
 		return value+":"+text;
 	}
 }

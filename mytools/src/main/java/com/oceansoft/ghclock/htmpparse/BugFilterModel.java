@@ -6,12 +6,12 @@ package com.oceansoft.ghclock.htmpparse;
 public class BugFilterModel {
 	String bugStatus;
 	String handler;
-	String keyWord;
+	String keyWord = "";
 	String member;
 	String moudle;
-	String orderBy;
+	String orderBy = "";
 	String pageIndex;
-	String pid;
+	String pid = "17173";
 	String priority;
 
 	public String getVersion() {

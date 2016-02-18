@@ -9,10 +9,10 @@
         android:id="@+id/tablayout_htmlparse_manageer"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="#1FBCD2"
+        android:background="@color/blueviolet"
         app:tabIndicatorColor="@color/white"
-        app:tabSelectedTextColor="@color/gray"
-        app:tabTextColor="@color/white"/>
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/gray"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_htmlparse_manager"

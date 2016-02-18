@@ -60,18 +60,6 @@
             android:text="中"
             android:textSize="16sp"
             />
-
-        <TextView
-            android:id="@+id/lv_tv_easybug_version"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_toLeftOf="@id/lv_tv_easybug_date"
-            android:singleLine="true"
-            android:text="CSSD5.0"
-            android:textSize="16sp"
-            />
-
         <TextView
             android:id="@+id/lv_tv_easybug_date"
             android:layout_width="wrap_content"
@@ -82,5 +70,16 @@
             android:text="2016-01-22"
             android:textSize="16sp"
             />
+        <TextView
+            android:id="@+id/lv_tv_easybug_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@id/lv_tv_easybug_date"
+            android:singleLine="true"
+            android:text="CSSD5.0"
+            android:textSize="16sp"
+            />
+        
     </RelativeLayout>
 </LinearLayout>

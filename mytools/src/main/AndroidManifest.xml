@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.inpes" >
+                                               package="com.oceansoft.ghclock" >
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
+    
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.RESTART_PACKAGES"/>
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.INSTALL_PACKAGES"/>
+    
+    //bluetooth
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+
+    <!-- Push service 运行需要的权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -16,31 +34,192 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".commoui.LoginActivity"
+            android:name="com.oceansoft.ghclock.commoui.LoginActivity"
             android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.oceansoft.ghclock.commoui.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name="com.oceansoft.ghclock.androidui.VollleySmapleActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name="com.oceansoft.ghclock.androidui.UdpSmapleActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name="com.oceansoft.ghclock.androidui.MainViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_main_view"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
+        <activity
+            android:name="com.oceansoft.ghclock.commoui.ExitActivity"
+            android:theme="@style/Exit_DialogStyle" />
+        <activity
+            android:name="com.oceansoft.ghclock.androidui.BluetoothSmapleActivity"
+            android:label="@string/activity_name_bluetoothsmaple" >
+        </activity>
+        <activity
+            android:name="com.oceansoft.ghclock.androidui.ToolsSmaples"
+            android:label="@string/app_main_name"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.oceansoft.ghclock.androidui.BluetoothChat" />
+        <activity android:name="com.oceansoft.ghclock.bluetoothwork.DeviceListActivity" />
+        <activity android:name="com.oceansoft.ghclock.navigatui.NagaviteDrawTooBarActivity"/>
+        <activity android:name="com.oceansoft.ghclock.androidui.BrocastCheckActivity"/>
+        <activity android:name="com.oceansoft.ghclock.androidui.NagaviteContextMainActivity"/>
+        <activity android:name="com.oceansoft.ghclock.baidupush.BaiduLoginActivity"/>
+        <activity android:name="com.oceansoft.ghclock.androidui.PushDemoActivity"/>
+        <activity android:name="com.oceansoft.ghclock.baidupush.PustClickOpenCustomActivity"/>
+        <activity android:name=".androidui.SwipeToDropLVActivity"/>
+        <activity android:name=".androidui.EquipmentDetailsActivity"/>
+        <activity android:name=".androidui.AutoLayoutSmapleActivity"/>
+        <activity android:name=".androidui.DigitalConvertSmapleActivity"/>
+        <activity android:name=".androidui.ServicesManagerSmapleActivity"/>
+        <activity android:name=".baidupush.BaiduMessageShowActivity"/>
+        <activity android:name=".ndk.NdkSmapleActivity"/>
+        <activity android:name=".ndk.NdkServiceSmapleActivity"/>
+        <activity android:name=".androidui.SelfHtmlParseManagerActivity"/>
+        
+        <!-- push service rich media display -->
         <activity
-            android:name=".commoui.SettingsActivity"
-            android:label="@string/title_activity_settings" >
-        </activity>
+        android:name="com.baidu.android.pushservice.richmedia.MediaViewActivity"
+        android:configChanges="orientation|keyboardHidden"
+        android:label="MediaViewActivity" >
+    </activity>
         <activity
-            android:name="com.inpes.bizyu.MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:name="com.baidu.android.pushservice.richmedia.MediaListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="MediaListActivity"
+            android:launchMode="singleTask" >
         </activity>
-        <activity
-            android:name="com.inpes.bizyu.MainViewActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_main_view"
-            android:theme="@style/FullscreenTheme" >
-        </activity>
-        <activity android:name=".commoui.ExitActivity"
-                  android:theme="@style/Exit_DialogStyle"/>
+        
+        
+        <!-- BrocastReceiver register-->
+        <receiver android:name="com.oceansoft.ghclock.bluetoothwork.BluetoothConnectActivityReceiver" >
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
+            </intent-filter>
+        </receiver>
+        
+        <!-- BaiduPush start service服务 -->
+        <!-- push service client -->
+        <receiver android:name="com.oceansoft.ghclock.baidupush.MyPushMessageReceiver">
+            <intent-filter>
+                <!-- 接收 push 消息 -->
+                <action android:name="com.baidu.android.pushservice.action.MESSAGE" />
+                <!-- 接收 bind、setTags 等 method 的返回结果 -->
+                <action android:name="com.baidu.android.pushservice.action.RECEIVE" />
+                <!-- 可选。接受通知点击事件，和通知自定义内容 -->
+                <action android:name="com.baidu.android.pushservice.action.notification.CLICK" />
+            </intent-filter>
+        </receiver>
+        <!-- 用于接收系统消息以保证 PushService 正常运行 -->
+        <receiver android:name="com.baidu.android.pushservice.PushServiceReceiver"
+                  android:process=":bdservice_v1" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="com.baidu.android.pushservice.action.notification.SHOW" />
+                <action android:name="com.baidu.android.pushservice.action.media.CLICK" />
+                <!-- 以下四项为可选的 action 声明，可大大提高 service 存活率和消息到达速度 -->
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".recevier.InstallBroadcast">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <!--<action android:name="android.intent.action.PACKAGE_REMOVED"/>-->
+                <!--<action android:name="android.intent.action.PACKAGE_REPLACED"/>-->
+                <!--<action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>-->
+            </intent-filter>
+        </receiver>
+
+        <!-- 用于接收系统消息以保证 PushService 正常运行 -->
+        <receiver android:name=".service.AutoServiceStartupReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <!-- 以下四项为可选的 action 声明，可大大提高 service 存活率和消息到达速度 -->
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+        <!-- Push 服务接收客户端发送的各种请求-->
+        <!-- 注意：RegistrationReceiver 在 2.1.1 及之前版本有拼写失误，为 RegistratonReceiver ，用新
+        版本 SDK 时请更改为如下代码-->
+        <receiver android:name="com.baidu.android.pushservice.RegistrationReceiver"
+                  android:process=":bdservice_v1" >
+            <intent-filter>
+                <action android:name="com.baidu.android.pushservice.action.METHOD" />
+                <action android:name="com.baidu.android.pushservice.action.BIND_SYNC" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        
+        <!-- MyAuto Service -->
+        
+        <service
+            android:name="com.oceansoft.ghclock.service.SystemAlterClockService"
+            android:enabled="true"
+            android:process=":auto_service"
+            android:exported="true" >
+            
+        </service>
+
+
+        <service  android:name="com.oceansoft.ghclock.ndk.HostMonitor"
+                  android:enabled="true"
+                  android:exported="true"
+            android:process=":alive_service">
+        </service>
+        <service android:name="com.oceansoft.ghclock.ndk.ScreenService"
+                 android:enabled="true"></service>
+        
+        
+        <!-- BaiduPush 服务 -->
+        <!-- 注意：在 4.0 (包含)之后的版本需加上如下所示的 intent-filter action -->
+        <service android:name="com.baidu.android.pushservice.PushService"
+                 android:exported="true" 
+                 android:process=":bdservice_v1" >
+        <intent-filter >
+            <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE" />
+        </intent-filter>
+        </service>
+        <!--  注意：在 4.4 ( 包含)之 之 后的版本需加上 如 下的 所示的 service -->
+        <service android:name="com.baidu.android.pushservice.CommandService"
+                 android:exported="true" >
+        </service>
+        
+        <!-- extra data -->
+        <!-- 在百度开发者中心查询应用的API Key -->
+        <meta-data
+            android:name="api_key"
+            android:value="kr9Gfsj1zZzRg1IqM82QHCU0" />
+
+        <!-- AUTO_LAYOUT 使用参数 -->
+        <meta-data android:name="design_width" android:value="1080"></meta-data>
+        <meta-data android:name="design_height" android:value="1920"></meta-data>
+        
     </application>
 
 </manifest>

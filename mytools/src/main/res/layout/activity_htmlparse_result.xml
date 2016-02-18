@@ -6,11 +6,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ListView
+        <com.oceansoft.ghclock.listviewutil.WaterDropListView
             android:id="@+id/lv_htmlparse_result"
             android:layout_width="match_parent"
             android:layout_margin="6dp"
             android:layout_height="match_parent">
-        </ListView>
+        </com.oceansoft.ghclock.listviewutil.WaterDropListView>
     </ScrollView>
 </LinearLayout>

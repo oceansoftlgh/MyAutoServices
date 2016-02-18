@@ -7,6 +7,7 @@ import com.oceansoft.ghclock.commonutil.MSGProxy;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,6 +17,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -69,9 +72,9 @@ public class SelfHtmlParseActivityControl {
 	public String getAllBugContent(HttpClient client) {
 		String result = "";
 		try {
-			PostMethod post = new PostMethod("http://easybug.org/Bug/AllBug/17137");
+			GetMethod get = new GetMethod("http://easybug.org/Bug/AllBug/17137");
 
-			result = getHtmlContent(client, post);
+			result = getHtmlContent(client, get);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,7 +99,7 @@ public class SelfHtmlParseActivityControl {
 			NameValuePair version = new NameValuePair("version", filter.getVersion());
 			post.setRequestBody(new NameValuePair[]{bugStatus, handler, keyWord, member, moudle, orderBy, pageIndex, pid, priority, version});
 			
-			getHtmlContent(client, post);
+			result = postHtmlContent(client, post);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -105,7 +108,7 @@ public class SelfHtmlParseActivityControl {
 		
 		return result;
 	}
-	public String getHtmlContent(HttpClient client, PostMethod post){
+	public String postHtmlContent(HttpClient client, PostMethod post){
 
 		String result = "";
 		try {
@@ -122,9 +125,27 @@ public class SelfHtmlParseActivityControl {
 		}
 		return result;
 	}
+	public String getHtmlContent(HttpClient client, GetMethod get){
+
+		String result = "";
+		try {
+			client.executeMethod(get);
+			byte[] buff = StreamTools.readInputStream(get.getResponseBodyAsStream());
+			//将返回的内容格式化为String存在html中
+			result = new String(buff);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+		if(result.contains("ERROR")){
+			return "";
+		}
+		return result;
+	}
 	
 	
 	public List<BugContentModel> getBugEnvityValues(String htmlString) {
+		
 		List<BugContentModel> resultList = new ArrayList<BugContentModel>();
 		//开始使用Jsoup
 		//Jsoup支援一个Document类   将刚才的html转化成Document
@@ -159,6 +180,24 @@ public class SelfHtmlParseActivityControl {
 			resultList.add(new BugContentModel(tds));
 		}
 		return resultList;
+	}
+	
+	public int getTotalPageNum(String htmlString){
+		Pattern p = Pattern.compile("href=\"javascript\\:GO\\([0-9]*\\)");
+		Matcher m = p.matcher(htmlString);
+		int totalPage = 1;
+		try {
+			while (m.find()) {
+				String orderStr = m.group();
+				int startIndex = orderStr.indexOf("(");
+				int endIndex = orderStr.indexOf(")");
+				int pageNum = Integer.parseInt(orderStr.substring(startIndex, endIndex));
+				totalPage = totalPage > pageNum ? totalPage : pageNum;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return totalPage;
 	}
 	
 	public HashMap<String, SelectorModel> getFiltersMap(String htmlString){
@@ -196,6 +235,20 @@ public class SelfHtmlParseActivityControl {
 			}
 			filtersMap.put(selectKey,new SelectorModel(selectKey,optionSet) );
 		}
+
+		//获取排序情况
+		Pattern p = Pattern.compile("href=\"javascript:OrderByThis\\(\'\\w*\'\\)");
+		Matcher m = p.matcher(htmlString);
+		ArrayList<OptionModel> orderOptions =  new ArrayList<>();
+		while (m.find()){
+			String orderStr = m.group();
+			int startkind = orderStr.indexOf("('");
+			int endKind = orderStr.indexOf("')");
+			String order = orderStr.substring(startkind+2,endKind);
+			orderOptions.add(new OptionModel(order,""));
+		}
+		filtersMap.put("orderBy",new SelectorModel("orderBy",orderOptions));
+		
 		
 		return filtersMap;
 	}

@@ -2,33 +2,73 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '23.0.0'
 
     defaultConfig {
-        applicationId "com.inpes.android.mytools"
-        minSdkVersion 11
+        applicationId "com.oceansoft.ghclock"
+        minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        ndk {
+            moduleName "mytoolsjni"
+            ldLibs "log"
+            abiFilters "armeabi", "armeabi-v7a", "x86"
+        }
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
+
+
+//  sourceSets{
+//
+//      main{
+//          jnilibs.srcDirs = []
+//      }
+//  }
+
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
 
+}
+repositories { flatDir { dirs 'libs' } }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile(name: 'circualreveal-1.1.1', ext: 'aar')
+    compile(name: 'contextnagivate', ext: 'aar')
+    //test TDD lib
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
     androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
-    testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:3.0-rc3'
     testCompile 'org.mockito:mockito-core:1.9.5'
+    //andorid 6.0 support package
     compile 'com.android.support:appcompat-v7:23.1.0'
-    compile 'com.android.support:design:23.1.0'
-    compile 'com.android.support:support-v4:23.1.0'
+    compile 'com.android.support:design:23.1.1'
+    compile 'com.android.support:support-v4:23.1.1'
+   
+    //httpVolley
     compile project(':android-volley-master')
-    compile files('libs/NiftyModalDialogEffectsManager-1.0.jar')
+    //SideMenu
+    compile project(':Side-Menu-Master')
+    //NDK Development
+    compile project(':ndklib')
+    //xutil
+    compile 'org.xutils:xutils:3.3.4'
+    
+    compile project(':autolayout-master')
 }

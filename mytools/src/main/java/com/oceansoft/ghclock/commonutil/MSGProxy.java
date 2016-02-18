@@ -11,7 +11,6 @@ public class MSGProxy {
 		if(null != handler){
 			this.mHandler = handler;
 		}
-		mHandler = new Handler();
 	}
 
 	public boolean sendMessage(int msgIndex){
